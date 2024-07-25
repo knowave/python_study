@@ -1,0 +1,2 @@
+dead = False
+print(dead)
