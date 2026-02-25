@@ -1,0 +1,60 @@
+[MASTER]
+# 분석할 소스 경로
+source-roots = .
+
+# 병렬 처리 (0 = CPU 코어 수 자동)
+jobs = 0
+
+
+[MESSAGES CONTROL]
+disable =
+    # ── Docstring 관련 ──────────────────────────────────────────
+    C0114,  # missing-module-docstring  : 파일 상단 모듈 설명 없음
+    C0115,  # missing-class-docstring   : 클래스 docstring 없음
+    C0116,  # missing-function-docstring: 함수 docstring 없음
+
+    # ── 설계 관련 ──────────────────────────────────────────────
+    R0903,  # too-few-public-methods    : Pydantic 모델은 메서드가 적어서 항상 걸림
+
+    # ── Import 관련 ────────────────────────────────────────────
+    C0415,  # import-outside-toplevel  : 순환 참조 방지용 지역 import 허용
+
+    # ── 기타 ───────────────────────────────────────────────────
+    W0611,  # unused-import             : __init__.py 에서 re-export 할 때 걸림
+    E1102,  # not-callable              : SQLAlchemy func.now() 오탐 방지
+    W0707,  # raise-missing-from        : except 에서 raise 시 from 절 생략 허용
+
+
+[FORMAT]
+# Black 포매터 기본값과 동일하게 맞춤
+max-line-length = 88
+
+# 들여쓰기: 공백 4칸 (PEP 8 표준)
+indent-string = "    "
+
+
+[DESIGN]
+# 함수/메서드 최대 인자 수 (FastAPI 라우터는 Depends 때문에 많아질 수 있음)
+max-args = 8
+
+# 함수 최대 줄 수
+max-statements = 50
+
+# 클래스 최대 속성 수
+max-attributes = 10
+
+
+[SIMILARITIES]
+# 중복 코드 감지 최소 줄 수 (너무 짧으면 오탐이 많음)
+min-similarity-lines = 10
+
+# import 문은 중복 감지에서 제외
+ignore-imports = yes
+
+
+[BASIC]
+# 짧은 변수명 허용 목록 (e, db, id 등 관용적으로 쓰는 이름)
+good-names = i, j, k, e, v, db, id, pk
+
+# 상수 네이밍: UPPER_CASE
+const-rgx = (([A-Z_][A-Z0-9_]*)|(__.*__))$
